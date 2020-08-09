@@ -1,0 +1,17 @@
+C:\Users\chard\Documents\GitHub\TaskManager\Task Manager\TaskManager.UnitTests\obj\Debug\TaskManager.UnitTests.csprojAssemblyReference.cache
+C:\Users\chard\Documents\GitHub\TaskManager\Task Manager\TaskManager.UnitTests\obj\Debug\TaskManager.UnitTests.csproj.CoreCompileInputs.cache
+C:\Users\chard\Documents\GitHub\TaskManager\Task Manager\TaskManager.UnitTests\bin\Debug\Microsoft.VisualStudio.TestPlatform.MSTest.TestAdapter.dll
+C:\Users\chard\Documents\GitHub\TaskManager\Task Manager\TaskManager.UnitTests\bin\Debug\Microsoft.VisualStudio.TestPlatform.MSTestAdapter.PlatformServices.Interface.dll
+C:\Users\chard\Documents\GitHub\TaskManager\Task Manager\TaskManager.UnitTests\bin\Debug\Microsoft.VisualStudio.TestPlatform.MSTestAdapter.PlatformServices.dll
+C:\Users\chard\Documents\GitHub\TaskManager\Task Manager\TaskManager.UnitTests\bin\Debug\TaskManager.UnitTests.dll
+C:\Users\chard\Documents\GitHub\TaskManager\Task Manager\TaskManager.UnitTests\bin\Debug\TaskManager.UnitTests.pdb
+C:\Users\chard\Documents\GitHub\TaskManager\Task Manager\TaskManager.UnitTests\bin\Debug\Microsoft.VisualStudio.TestPlatform.TestFramework.dll
+C:\Users\chard\Documents\GitHub\TaskManager\Task Manager\TaskManager.UnitTests\bin\Debug\Microsoft.VisualStudio.TestPlatform.TestFramework.Extensions.dll
+C:\Users\chard\Documents\GitHub\TaskManager\Task Manager\TaskManager.UnitTests\bin\Debug\Microsoft.VisualStudio.TestPlatform.TestFramework.xml
+C:\Users\chard\Documents\GitHub\TaskManager\Task Manager\TaskManager.UnitTests\bin\Debug\Microsoft.VisualStudio.TestPlatform.TestFramework.Extensions.xml
+C:\Users\chard\Documents\GitHub\TaskManager\Task Manager\TaskManager.UnitTests\obj\Debug\TaskManager.UnitTests.csproj.CopyComplete
+C:\Users\chard\Documents\GitHub\TaskManager\Task Manager\TaskManager.UnitTests\obj\Debug\TaskManager.UnitTests.dll
+C:\Users\chard\Documents\GitHub\TaskManager\Task Manager\TaskManager.UnitTests\obj\Debug\TaskManager.UnitTests.pdb
+C:\Users\chard\Documents\GitHub\TaskManager\Task Manager\TaskManager.UnitTests\bin\Debug\TaskManager.exe
+C:\Users\chard\Documents\GitHub\TaskManager\Task Manager\TaskManager.UnitTests\bin\Debug\TaskManager.pdb
+C:\Users\chard\Documents\GitHub\TaskManager\Task Manager\TaskManager.UnitTests\bin\Debug\TaskManager.exe.config
