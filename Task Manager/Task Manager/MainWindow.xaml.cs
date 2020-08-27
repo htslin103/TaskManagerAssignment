@@ -15,7 +15,12 @@ namespace TaskManager
       
         public MainWindow()
         {
-            InitializeComponent();
+            
+            DataContext = tasks;
+          
+        
+
+        InitializeComponent();
             currentDateLabel();
             btnSave.IsEnabled = false;
             btnEdit.IsEnabled = false;
