@@ -95,8 +95,8 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Commands\RelayCommand.cs" />
     <Compile Include="Models\Task.cs" />
-    <Compile Include="Commands\TaskUpdateCommand.cs" />
     <Compile Include="Models\TaskService.cs" />
     <Compile Include="ViewModels\TaskViewModel.cs" />
     <Page Include="MainWindow.xaml">

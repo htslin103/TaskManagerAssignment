@@ -1,28 +1,35 @@
-﻿using System;
+﻿using DynamicData;
+using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using TaskManager.Models;
 
-namespace Task_Manager.Models
+namespace TaskManager.Models
 {
     public class TaskService
     {
-        private static List<Task> ObjTaskList; 
+        private static ObservableCollection<Task> ObjTaskList;
 
         public TaskService()
         {
-            ObjTaskList = new List<Task>();
-        }
+            ObjTaskList = new ObservableCollection<Task>()
+            {
+                new Task { Id=1, Date = "01/10/2020" , Name = "Fight stuff"},
+                new Task { Id=2, Date = "02/10/2020" , Name = "Cook stuff"},
+                new Task { Id=3, Date = "03/10/2020" , Name = "Destroy stuff"}
+            };
+        }     
 
-        //Must set date overdue here
+        
         public bool Add(Task objNewTask)
         {
             ObjTaskList.Add(objNewTask);
             return true;
         }
 
-        public List<Task> GetAll()
+        public ObservableCollection<Task> GetAll()
         {
             return ObjTaskList;
         }

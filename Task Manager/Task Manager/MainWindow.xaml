@@ -8,17 +8,17 @@
 
 
     <Grid Margin="0,-46,-111,-119" HorizontalAlignment="Left" Width="903" Height="700" VerticalAlignment="Top" >
-        <Grid.Resources> 
-            
-            
+        <Grid.Resources>
+
+
         </Grid.Resources>
-        <Button x:Name="btnNewTask" Content="Add Task&#xD;&#xA;" HorizontalAlignment="Left" Margin="543,270,0,0" VerticalAlignment="Top" Width="113"  Height="20" Click="BtnNewTask_Click"/>
-        <Label x:Name="lblCurrentDate" Content="" HorizontalAlignment="Center" Margin="74,0,336,0" VerticalAlignment="Top" Height="79" Width="382" AutomationProperties.Name="currentDate" FontSize="20"/>
-        <DatePicker x:Name="dtDateSelect" HorizontalAlignment="Left" Margin="543,65,0,0" VerticalAlignment="Top"  AutomationProperties.IsRequiredForForm="True"  Text="{Binding Date}"  />
-        <TextBox x:Name="txtTaskName" HorizontalAlignment="Left" Height="92" Margin="543,112,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="209"/>
-        <Button x:Name="btnDeleteTask" Content="Delete Task" HorizontalAlignment="Left" Margin="543,309,0,0" VerticalAlignment="Top" Width="113" Click="BtnDeleteTask_Click"/>
-        <Button x:Name="btnComplete" Command="{Binding Path=MarkTaskComplete}" Content="Mark As Complete" HorizontalAlignment="Left" Margin="543,351,0,0" VerticalAlignment="Top" Width="113" Click="BtnComplete_Click"/>
-        <DataGrid x:Name="liViewTasks" HorizontalAlignment="Left" Height="292" Margin="29,79,0,0" VerticalAlignment="Top" Width="427" AutoGenerateColumns="False" IsReadOnly="True" ItemsSource="{Binding Path=TaskList}">
+        <Button x:Name="btnNewTask" Content="Add Task&#xD;&#xA;" HorizontalAlignment="Left" Margin="522,357,0,0" VerticalAlignment="Top" Width="75"  Height="20" Command="{Binding SaveCommand}" />
+        <Label x:Name="lblCurrentDate" Content="" HorizontalAlignment="Center" Margin="46,45,475,0" VerticalAlignment="Top" Height="79" Width="382" AutomationProperties.Name="currentDate" FontSize="20"/>
+        <TextBox x:Name="txtId" HorizontalAlignment="Left" Height="20" Margin="395,134,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="94" Text="{Binding Path=CurrentTask.Id, Mode=TwoWay}" />
+        <DatePicker x:Name="dtDateSelect" HorizontalAlignment="Left" Margin="522,133,0,0" VerticalAlignment="Top"  AutomationProperties.IsRequiredForForm="True"  Text="{Binding Path=CurrentTask.Date, Mode=TwoWay}" Width="209"  />
+        <TextBox x:Name="txtTaskName" HorizontalAlignment="Left" Height="113" Margin="522,192,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="223" Text="{Binding Path=CurrentTask.Name, Mode=TwoWay}" />
+        <Button x:Name="btnComplete" Command="{Binding Path=MarkTaskComplete}" Content="Mark As Complete" HorizontalAlignment="Left" Margin="522,430,0,0" VerticalAlignment="Top" Width="75" />
+        <DataGrid x:Name="liViewTasks" HorizontalAlignment="Left" Height="292" Margin="31,169,0,0" VerticalAlignment="Top" Width="427" AutoGenerateColumns="False" IsReadOnly="True" ItemsSource="{Binding Path=TasksList}">
             <DataGrid.CellStyle>
                 <Style TargetType="DataGridCell">
                     <Setter Property="FontWeight" Value="Bold" />
@@ -35,14 +35,17 @@
             </DataGrid.CellStyle>
 
             <DataGrid.Columns>
+                <DataGridTextColumn Header="Id" Binding="{Binding Path=Id}" />
                 <DataGridTextColumn Header="Date" Binding="{Binding Path=Date}" />
                 <DataGridTextColumn Header="Name" Binding="{Binding Path=Name}" MinWidth="200" />
             </DataGrid.Columns>
         </DataGrid>
-        <Button x:Name="btnEdit" Content="Edit" HorizontalAlignment="Left" Margin="543,213,0,0" VerticalAlignment="Top" Width="75" Click="BtnEdit_Click"/>
-        <Button x:Name="btnSave" Command="{Binding UpdateCommand}" HorizontalAlignment="Left" Margin="677,351,0,0" VerticalAlignment="Top" Width="75" >Update</Button>
-        <TextBox HorizontalAlignment="Left" Height="23" Margin="677,309,0,0" Text="{Binding Task.Name, UpdateSourceTrigger=PropertyChanged}" TextWrapping="Wrap"  VerticalAlignment="Top" Width="120" />
-     
+        <Button x:Name="btnUpdate" Content="Update" HorizontalAlignment="Left" Margin="522,319,0,0" VerticalAlignment="Top" Width="75" Command="{Binding Path=UpdateCommand}"/>
+        <Button x:Name="btnDelete" Content="Delete" HorizontalAlignment="Left" Margin="522,393,0,0" VerticalAlignment="Top" Width="75" Command="{Binding Path=DeleteCommand}"/>
+
+        <TextBlock HorizontalAlignment="Left" Height="23" Margin="89,129,0,0" TextWrapping="Wrap" Text="{Binding Path = Message}" VerticalAlignment="Top" Width="193"/>
+        <TextBlock HorizontalAlignment="Left" Margin="327,134,0,0" TextWrapping="Wrap" Text="Enter Id:" VerticalAlignment="Top" RenderTransformOrigin="1.364,0.5"/>
+
 
 
     </Grid>
