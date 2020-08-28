@@ -1,26 +1,23 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Windows;
-
+using TaskManager.ViewModels;
+using TaskManager.Models;
 
 namespace TaskManager
 {
-    /// <summary>
-    /// Interaction logic for MainWindow.xaml
-    /// </summary>
+   
     public partial class MainWindow : Window
     {
         private List<Task> tasks = new List<Task>();
         Task editTask = new Task();
-      
-        public MainWindow()
-        {
-            
-            DataContext = tasks;
-          
-        
+        TaskViewModel ViewModel;
 
-        InitializeComponent();
+        public MainWindow()
+        {                          
+            InitializeComponent();
+            ViewModel = new TaskViewModel();
+            this.DataContext = ViewModel;
             currentDateLabel();
             btnSave.IsEnabled = false;
             btnEdit.IsEnabled = false;
@@ -31,7 +28,7 @@ namespace TaskManager
         {          
             lblCurrentDate.Content = "Today's date: " + DateTime.Now.Date.ToLongDateString();
         }
-   
+
         //Adds New Task
         private void BtnNewTask_Click(object sender, RoutedEventArgs e)
         {
@@ -43,7 +40,7 @@ namespace TaskManager
                 {
                     Task overdueTask = new Task() { Date = dtDateSelect.SelectedDate.Value.Date.ToString("yyyy/MM/dd"), Name = taskName.ToString() };
                     overdueTask.isOverdue = true;
-                    tasks.Add((Task)overdueTask);                   
+                    tasks.Add((Task)overdueTask);
                 }
                 else
                 {
@@ -63,7 +60,7 @@ namespace TaskManager
                 MessageBox.Show("Task name is required", "No task name");
             }
         }
-        
+
         //Deletes Task
         private void BtnDeleteTask_Click(object sender, RoutedEventArgs e)
         {
@@ -78,21 +75,22 @@ namespace TaskManager
         {
             if (liViewTasks.HasItems && liViewTasks.SelectedItem != null)
             {
-            Task compTask = ((Task)liViewTasks.SelectedItem);            
-            compTask.isComplete = true;
-            tasks.Add((Task)compTask);
-            tasks.Remove((Task)liViewTasks.SelectedItem);
-            liViewTasks.Items.Refresh();
+                Task compTask = ((Task)liViewTasks.SelectedItem);
+                compTask.isComplete = true;
+                tasks.Add((Task)compTask);
+                tasks.Remove((Task)liViewTasks.SelectedItem);
+                liViewTasks.Items.Refresh();
             }
         }
         //User clicks edit
         private void BtnEdit_Click(object sender, RoutedEventArgs e)
         {
             if (liViewTasks.SelectedItem != null)
-            {           
-                    editTask = ((Task)liViewTasks.SelectedItem);
-                    txtTaskName.Text = editTask.Name.ToString();
-                    btnSave.IsEnabled = true;                     
+            {
+                editTask = ((Task)liViewTasks.SelectedItem);
+                txtTaskName.Text = editTask.Name.ToString();
+                dtDateSelect.Text = editTask.Date.ToString();
+                btnSave.IsEnabled = true;
             }
             else
             {
@@ -102,7 +100,7 @@ namespace TaskManager
         //User clicks save
         private void BtnSave_Click(object sender, RoutedEventArgs e)
         {
-     
+
             if (dtDateSelect.SelectedDate != null && txtTaskName.Text != "")
             {
                 tasks.Remove((Task)liViewTasks.SelectedItem);
@@ -111,7 +109,7 @@ namespace TaskManager
                 {
                     Task overdueTask = new Task() { Date = dtDateSelect.SelectedDate.Value.Date.ToString("yyyy/MM/dd"), Name = taskName };
                     overdueTask.isOverdue = true;
-                    tasks.Add((Task)overdueTask);                                   
+                    tasks.Add((Task)overdueTask);
                 }
                 else
                 {

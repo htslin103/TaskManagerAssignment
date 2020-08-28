@@ -1,5 +1,6 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using TaskManager;
+using TaskManager.Models;
 
 namespace TaskManager.UnitTests
 {
