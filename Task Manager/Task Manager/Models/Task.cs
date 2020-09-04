@@ -5,60 +5,22 @@ using System.Windows.Input;
 
 namespace TaskManager.Models
 {
-    public class Task: INotifyPropertyChanged
+    public class Task
     {
 
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        protected bool SetProperty<T>(ref T field, T newValue, [CallerMemberName] string propertyName = null)
-        {
-            if (!EqualityComparer<T>.Default.Equals(field, newValue))
-            {
-                field = newValue;
-                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-                return true;
-            }
-            return false;
-
-        }
-
         //Data
-        private string _date;
-        private string _name;
-        private int _id; 
+        public string Date { get; set; }
+        public string Name { get; set; }
+        public int Id { get; set; }
+        public bool isComplete { get; set; }
+        public bool isOverdue { get; set; }
 
-        //Gets or sets values
-        //Task Date
-        public string Date
-        {
-            get => _date;
-            set => SetProperty(ref _date, value);
-        }
-
-        public int Id
-        {
-            get => _id;
-            set => SetProperty(ref _id, value);
-        }
-        //Task Name
-        public string Name
-        {
-            get => _name;
-            set => SetProperty(ref _name, value);
-        }
         //Default constructor
-        public Task()
-        {
-        }
+        public Task(){ }
 
-        public bool isComplete
+        public Task(string name)
         {
-            get; set;
-        }
-
-        public bool isOverdue
-        {
-            get; set;
+            Name = name;
         }
 
         public Task(string date, string name)

@@ -1,0 +1,55 @@
+﻿<reactiveui:ReactiveWindow 
+        x:Class="TaskManager.Views.TaskView"  
+        xmlns:reactiveui="http://reactiveui.net"
+        x:TypeArguments="viewModel:TaskViewModel"
+        xmlns:viewModel="clr-namespace:TaskManager.ViewModels"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    
+        mc:Ignorable="d"
+        Title="TaskView" Height="424.5" Width="867.5" WindowStartupLocation="CenterScreen">
+    <Grid Margin="-43,-55,2,-21">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="20"/>
+            <ColumnDefinition Width="auto"/>
+            <ColumnDefinition Width="20"/>
+            <ColumnDefinition Width="539*"/>
+            <ColumnDefinition Width="184*"/>
+            <ColumnDefinition Width="92*"/>
+            <ColumnDefinition Width="69*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="20"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition/>
+            <RowDefinition Height="auto"/>
+        </Grid.RowDefinitions>
+
+        <!--Add Task Button-->
+        <Button x:Name="AddNewTaskbtn" Content="Add Task" HorizontalAlignment="Left" Margin="40,281,0,0" VerticalAlignment="Top" Width="75" Grid.Column="4" Grid.Row="6" Height="20"  />
+        <!--Delete Task Button-->
+        <Button x:Name="DeleteTaskbtn"  Content="Delete Task" Grid.Column="4" HorizontalAlignment="Left" Margin="40,315,0,0" Grid.Row="6" VerticalAlignment="Top" Width="75" Height="20"
+             Command="{Binding DataContext.DeleteCommand, ElementName=root}"/>
+        <!--Date select-->
+        <DatePicker x:Name="taskDatePicker" HorizontalAlignment="Left" Margin="40,109,0,0" VerticalAlignment="Top" Height="26" Width="214"  Grid.ColumnSpan="2" Grid.Column="4" Grid.Row="6"/>
+        <!--Name Select-->
+        <TextBox x:Name="NameTextBox" HorizontalAlignment="Left" Height="97" Margin="40,163,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="214" Grid.ColumnSpan="2" Grid.Column="4" Grid.Row="6" />
+        <!--Today's Date-->
+        <TextBlock x:Name="currentDateTxtBlock" Grid.Column="4" HorizontalAlignment="Left" Margin="40,42,0,0" Grid.Row="6" TextWrapping="Wrap" VerticalAlignment="Top" Grid.ColumnSpan="2" Height="34" Width="214" />
+        <ListView  x:Name="tasksDataGrid"  DisplayMemberPath="" Grid.Column="3" HorizontalAlignment="Left" Height="261" Margin="64,109,0,0" Grid.Row="6" VerticalAlignment="Top" Width="422">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn/>
+                </GridView>
+            </ListView.View>
+        </ListView>
+     
+
+    </Grid>
+</reactiveui:ReactiveWindow>

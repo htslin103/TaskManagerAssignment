@@ -2,151 +2,138 @@
 using TaskManager.Models;
 using System.ComponentModel;
 using System.Collections.ObjectModel;
-using TaskManager.Commands;
 using System.Linq;
 using System.Collections.Generic;
+using ReactiveUI;
+using Splat;
+using System.Windows;
+using System.Reactive;
 
 namespace TaskManager.ViewModels
 {
 
-    public class TaskViewModel : INotifyPropertyChanged
-    {  /// <summary>
-       /// Initializes a new instance of the CustomerViewModel class 
-       /// </summary>
-       /// 
-        public event PropertyChangedEventHandler PropertyChanged;
-        TaskService ObjTaskService;
+    public class TaskViewModel : ReactiveObject
+    { 
+        private ObservableCollection<Task> taskList;
+        private Task selectedItem;
+        private string contentName;
+        private string contentDate;
+ 
 
+
+        public ReactiveCommand<string, Unit> AddCommand { get; }
+        public ReactiveCommand<Task, Unit> DeleteCommand { get; }
+
+        //Constructor
         public TaskViewModel()
         {
 
-            ObjTaskService = new TaskService();
+         
+            // create a task list with fake     
+            taskList = new ObservableCollection<Task>()
+            {
+                new Task { Id=1, Date = "01/10/2020" , Name = "Fight stuff"},
+                new Task { Id=2, Date = "02/10/2020" , Name = "Cook stuff"},
+                new Task { Id=3, Date = "03/10/2020" , Name = "Destroy stuff"}
+            };
+            //load the data
             LoadData();
-            CurrentTask = new Task();
-            saveCommand = new RelayCommand(Save);
+            AddCommand = ReactiveCommand.Create<string>(x => AddNewTask(x));
+            DeleteCommand = ReactiveCommand.Create<Task>(x => DeleteTask(x));
         }
 
-        private void OnPropertyChanged(string propertyName)
+        public Task SelectedItem
         {
-            if (PropertyChanged != null)
+            get { return selectedItem; }
+            set => this.RaiseAndSetIfChanged(ref selectedItem, value);
+        }
+        // content for new task getter and setter
+        public string ContentName
+        {
+            get { return contentName; }
+            set => this.RaiseAndSetIfChanged(ref contentName, value);
+        }
+
+        public string ContentDate
+        {
+            get { return contentDate; }
+            set => this.RaiseAndSetIfChanged(ref contentDate, value);
+        }
+
+        public DateTime CurrentDate
+        {
+            get
             {
-                PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+                return DateTime.Now;
             }
         }
 
-        private List<Task> taskList = new List<Task>();
-        public List<Task> TasksList
+        //Loads the task list to read
+        public ObservableCollection<Task> LoadData()
+        {
+            return taskList;
+        }
+
+        public ObservableCollection<Task> TaskList
         {
             get { return taskList; }
-            set { taskList = value; OnPropertyChanged("TasksList"); }
+            set => this.RaiseAndSetIfChanged(ref taskList, value);       
         }
 
-        private void LoadData()
+        //Adds a new task to the list 
+        public void AddNewTask(string contentNew)
         {
-            TasksList = new List<Task>(ObjTaskService.GetAll());
-        }
-
-       
-
-        private Task currentTask;
-        public Task CurrentTask {
-
-            get { return currentTask; } 
-            set { currentTask = value;  OnPropertyChanged("CurrentTask"); }
-            }
-        private string message;
-        public string Message
-        {
-            get { return message; }
-            set { message = value; OnPropertyChanged("Message"); }
-        }
-
-        private RelayCommand saveCommand;
-        public RelayCommand SaveCommand { 
-            get { return saveCommand;  }        
-        }
-      
-        public void Save()
-        {
-
-            try
+            if (string.IsNullOrWhiteSpace(ContentName))//ContentNew
             {
-   
-                var IsSaved = ObjTaskService.Add(CurrentTask);
-                LoadData();
-                if(IsSaved)
-                {
-                    Message = "Task saved";
-                }
-                else
-                {
-                    Message = "Task save operation failed";
-                }
+                // display error message
+                MessageBox.Show("Please enter a name for the new task", "Error");
+                return;
             }
-            catch (Exception ex)
+            if (string.IsNullOrWhiteSpace(ContentDate))//ContentNew
             {
-
-                Message = ex.Message; 
+                // display error message
+                MessageBox.Show("Please enter a date for the new task", "Error");
+                return;
             }
 
+            // create new task object
+            var newTask = new Task { Name = ContentName, Date = ContentDate };
+            // assign id to new task
+            if (taskList.Count != 0) // list is not empty, current id = last id + 1
+            {
+                newTask.Id = taskList.Max(x => x.Id) + 1;
+            }
+            else // if list is empty start with id = 1
+            {
+                newTask.Id = 1;
+            }
+
+            // add to list
+            taskList.Add(newTask);
+            //Load the list again
+            LoadData();
         }
 
-        private RelayCommand updateCommand;
-        public RelayCommand UpdateCommand
+        /// <summary>
+        /// Deletes task from the list
+        /// </summary>
+        /// <param name="task">Task object to be deleted</param>
+        public void DeleteTask(Task task)
         {
-            get { return updateCommand; }
-        }
-
-        public void Update()
-        {
-            try
+            if (task != null)
             {
-                var IsUpdate = ObjTaskService.Update(CurrentTask);
-                if(IsUpdate)
+                try
                 {
-                    Message = "Task Updated";
-                    LoadData();
+                    // remove task from list
+                    taskList.Remove(task);
                 }
-                else
+                catch (Exception)
                 {
-                    Message =  "Update operation failed";
+                    MessageBox.Show("Error deleting task", "Error");
                 }
-
+                
             }
-            catch (Exception ex)
-            {
-
-                Message = ex.Message;
-            }
-        }
-
-        private RelayCommand deleteCommand;
-        public RelayCommand DeleteCommand
-        {
-            get { return deleteCommand; }
-        }
-
-        public void Delete()
-        {
-            try
-
-            {
-                var IsDelete = ObjTaskService.Delete(CurrentTask.Id);
-                if(IsDelete)
-                {
-                    Message = "Task deleted";
-                }
-                else
-                {
-                    Message = "Delete operation failed";
-                }
-            }
-
-            catch (Exception ex) 
-            {
-
-                Message = ex.Message;
-            }
+            MessageBox.Show("Task is null", "Error"); 
         }
     } 
 }
