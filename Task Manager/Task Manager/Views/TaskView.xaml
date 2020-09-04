@@ -42,8 +42,30 @@
         <TextBox x:Name="NameTextBox" HorizontalAlignment="Left" Height="97" Margin="40,163,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="214" Grid.ColumnSpan="2" Grid.Column="4" Grid.Row="6" />
         <!--Today's Date-->
         <TextBlock x:Name="currentDateTxtBlock" Grid.Column="4" HorizontalAlignment="Left" Margin="40,42,0,0" Grid.Row="6" TextWrapping="Wrap" VerticalAlignment="Top" Grid.ColumnSpan="2" Height="34" Width="214" />
-        <DataGrid  x:Name="tasksDataGrid"  DisplayMemberPath="" Grid.Column="3" HorizontalAlignment="Left" Height="261" Margin="64,109,0,0" Grid.Row="6" VerticalAlignment="Top" Width="422" CanUserAddRows="false" AutoGenerateColumns="False"
+        <DataGrid  x:Name="tasksDataGrid"  DisplayMemberPath="" Grid.Column="3" HorizontalAlignment="Left" Height="261" Margin="64,109,0,0" Grid.Row="6" VerticalAlignment="Top" Width="Auto" CanUserAddRows="false" AutoGenerateColumns="False"
                   SelectedItem="{Binding SelectedTask, Mode=OneWay}">
+
+            <DataGrid.CellStyle>
+                <Style TargetType="{x:Type DataGridCell}">
+                    <Style.Triggers>
+                        <Trigger Property="DataGridCell.IsSelected" Value="True">
+                            <Setter Property="BorderBrush">
+                                <Setter.Value>
+                                    <SolidColorBrush Color="Transparent"/>
+                                </Setter.Value>
+                            </Setter>
+                            <Setter Property="Foreground"
+                            Value="{DynamicResource
+                                   {x:Static SystemColors.ControlTextBrushKey}}"/>
+                            <Setter Property="Background">
+                                <Setter.Value>
+                                    <SolidColorBrush Color="Gray"/>
+                                </Setter.Value>
+                            </Setter>
+                        </Trigger>
+                    </Style.Triggers>
+                </Style>
+            </DataGrid.CellStyle> 
             <!--Complete/Overdue bindings-->
             <DataGrid.RowStyle>
                 <Style TargetType="DataGridRow">

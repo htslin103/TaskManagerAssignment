@@ -100,3 +100,4 @@ C:\Users\hlin\OneDrive - C4i Training & Technology\Documents\GitHub\TaskManagerA
 C:\Users\hlin\OneDrive - C4i Training & Technology\Documents\GitHub\TaskManagerAssignment\Task Manager\Task Manager\obj\Debug\TaskManager.csproj.CopyComplete
 C:\Users\hlin\OneDrive - C4i Training & Technology\Documents\GitHub\TaskManagerAssignment\Task Manager\Task Manager\obj\Debug\TaskManager.exe
 C:\Users\hlin\OneDrive - C4i Training & Technology\Documents\GitHub\TaskManagerAssignment\Task Manager\Task Manager\obj\Debug\TaskManager.pdb
+C:\Users\hlin\OneDrive - C4i Training & Technology\Documents\GitHub\TaskManagerAssignment\Task Manager\Task Manager\obj\Debug\TaskManager.csprojAssemblyReference.cache

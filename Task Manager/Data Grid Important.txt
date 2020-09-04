@@ -26,7 +26,7 @@
                     </Style.Triggers>
                 </Style>
 
-            </DataGrid.CellStyle>-->
+            </DataGrid.CellStyle>
 
             <!--Complete/Overdue bindings-->
           <DataGrid.RowStyle>
