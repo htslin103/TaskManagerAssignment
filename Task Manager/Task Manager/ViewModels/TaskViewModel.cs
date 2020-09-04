@@ -15,7 +15,7 @@ namespace TaskManager.ViewModels
     public class TaskViewModel : ReactiveObject
     { 
         private ObservableCollection<Task> taskList;
-        private Task selectedItem;
+        private Task selectedTask;
         private string contentName;
         private string contentDate;
  
@@ -39,13 +39,13 @@ namespace TaskManager.ViewModels
             //load the data
             LoadData();
             AddCommand = ReactiveCommand.Create<string>(x => AddNewTask(x));
-            DeleteCommand = ReactiveCommand.Create<Task>(x => DeleteTask(x));
+            DeleteCommand = ReactiveCommand.Create<Task>(x => DeleteTask(SelectedTask));
         }
 
-        public Task SelectedItem
+        public Task SelectedTask
         {
-            get { return selectedItem; }
-            set => this.RaiseAndSetIfChanged(ref selectedItem, value);
+            get { return selectedTask; }
+            set => this.RaiseAndSetIfChanged(ref selectedTask, value);
         }
         // content for new task getter and setter
         public string ContentName
@@ -133,7 +133,7 @@ namespace TaskManager.ViewModels
                 }
                 
             }
-            MessageBox.Show("Task is null", "Error"); 
+
         }
     } 
 }

@@ -34,7 +34,7 @@ namespace TaskManager.Views
             this.Bind(ViewModel, vm => vm.ContentName, v => v.NameTextBox.Text);
             this.Bind(ViewModel, vm => vm.ContentDate, v => v.taskDatePicker.Text);
             this.OneWayBind(ViewModel, vm => vm.CurrentDate, v => v.currentDateTxtBlock.Text);
-            
+            this.Bind(ViewModel, vm => vm.SelectedTask, view => view.tasksDataGrid.SelectedItem);
 
 
 
@@ -43,6 +43,7 @@ namespace TaskManager.Views
             {
                 this.OneWayBind(ViewModel, x => x.TaskList, x => x.tasksDataGrid.ItemsSource).DisposeWith(disposable);
             });
+            
             //Add button click
             this.WhenActivated(disposable =>
             {

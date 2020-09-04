@@ -15,6 +15,7 @@ C:\Users\chard\Documents\GitHub\TaskManager\Task Manager\TaskManager.UnitTests\o
 C:\Users\chard\Documents\GitHub\TaskManager\Task Manager\TaskManager.UnitTests\bin\Debug\TaskManager.exe
 C:\Users\chard\Documents\GitHub\TaskManager\Task Manager\TaskManager.UnitTests\bin\Debug\TaskManager.pdb
 C:\Users\chard\Documents\GitHub\TaskManager\Task Manager\TaskManager.UnitTests\bin\Debug\TaskManager.exe.config
+C:\Users\hlin\OneDrive - C4i Training & Technology\Documents\GitHub\TaskManagerAssignment\Task Manager\TaskManager.UnitTests\bin\Debug\System.Reactive.xml
 C:\Users\hlin\OneDrive - C4i Training & Technology\Documents\GitHub\TaskManagerAssignment\Task Manager\TaskManager.UnitTests\bin\Debug\Microsoft.VisualStudio.TestPlatform.MSTest.TestAdapter.dll
 C:\Users\hlin\OneDrive - C4i Training & Technology\Documents\GitHub\TaskManagerAssignment\Task Manager\TaskManager.UnitTests\bin\Debug\Microsoft.VisualStudio.TestPlatform.MSTestAdapter.PlatformServices.Interface.dll
 C:\Users\hlin\OneDrive - C4i Training & Technology\Documents\GitHub\TaskManagerAssignment\Task Manager\TaskManager.UnitTests\bin\Debug\Microsoft.VisualStudio.TestPlatform.MSTestAdapter.PlatformServices.dll
@@ -37,7 +38,6 @@ C:\Users\hlin\OneDrive - C4i Training & Technology\Documents\GitHub\TaskManagerA
 C:\Users\hlin\OneDrive - C4i Training & Technology\Documents\GitHub\TaskManagerAssignment\Task Manager\TaskManager.UnitTests\bin\Debug\Microsoft.VisualStudio.TestPlatform.TestFramework.Extensions.xml
 C:\Users\hlin\OneDrive - C4i Training & Technology\Documents\GitHub\TaskManagerAssignment\Task Manager\TaskManager.UnitTests\bin\Debug\ReactiveUI.WPF.xml
 C:\Users\hlin\OneDrive - C4i Training & Technology\Documents\GitHub\TaskManagerAssignment\Task Manager\TaskManager.UnitTests\bin\Debug\ReactiveUI.xml
-C:\Users\hlin\OneDrive - C4i Training & Technology\Documents\GitHub\TaskManagerAssignment\Task Manager\TaskManager.UnitTests\bin\Debug\System.Reactive.xml
 C:\Users\hlin\OneDrive - C4i Training & Technology\Documents\GitHub\TaskManagerAssignment\Task Manager\TaskManager.UnitTests\bin\Debug\Splat.xml
 C:\Users\hlin\OneDrive - C4i Training & Technology\Documents\GitHub\TaskManagerAssignment\Task Manager\TaskManager.UnitTests\bin\Debug\System.ValueTuple.xml
 C:\Users\hlin\OneDrive - C4i Training & Technology\Documents\GitHub\TaskManagerAssignment\Task Manager\TaskManager.UnitTests\bin\Debug\DynamicData.xml
