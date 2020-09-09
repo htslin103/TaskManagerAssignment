@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Windows.Input;
@@ -9,11 +10,11 @@ namespace TaskManager.Models
     {
 
         //Data
-        public string Date { get; set; }
+        public DateTime Date { get; set; }
         public string Name { get; set; }
         public int Id { get; set; }
-        public bool isComplete { get; set; }
-        public bool isOverdue { get; set; }
+        public bool IsComplete { get; set; }
+        public bool IsOverdue { get; set; }
 
         //Default constructor
         public Task(){ }
@@ -23,7 +24,7 @@ namespace TaskManager.Models
             Name = name;
         }
 
-        public Task(string date, string name)
+        public Task(DateTime date, string name)
         {
             Date = date;
             Name = name;
@@ -31,7 +32,7 @@ namespace TaskManager.Models
 
         public bool taskIsComplete(Task task)
         {
-            if (task.isComplete == true)
+            if (task.IsComplete == true)
             {
                 return true;
             }
@@ -41,7 +42,7 @@ namespace TaskManager.Models
 
         public bool taskIsOverdue(Task task)
         {
-            if (task.isOverdue == true)
+            if (task.IsOverdue == true)
             {
                 return true;
             }

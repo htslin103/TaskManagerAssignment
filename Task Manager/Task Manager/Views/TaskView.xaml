@@ -9,40 +9,45 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     
         mc:Ignorable="d"
-        Title="TaskView" Height="424.5" Width="867.5" WindowStartupLocation="CenterScreen">
-    <Grid Margin="-43,-55,2,-21">
+        Title="Task Manager" Height="412.5" Width="674" WindowStartupLocation="CenterScreen">
+    <Grid Margin="-43,-50,2,-21">
         <Grid.ColumnDefinitions>
+            <!--Far Left, col 0 -->
             <ColumnDefinition Width="20"/>
             <ColumnDefinition Width="auto"/>
+            <ColumnDefinition Width="auto"/>
+            <ColumnDefinition Width="auto"/>
+            <!--Rest of space-->
+            <ColumnDefinition Width="*"/>
+            <!--Far Right-->
             <ColumnDefinition Width="20"/>
-            <ColumnDefinition Width="539*"/>
-            <ColumnDefinition Width="184*"/>
-            <ColumnDefinition Width="92*"/>
-            <ColumnDefinition Width="69*"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="20"/>
+            <RowDefinition Height="5.667"/>
+            <RowDefinition Height="5.667"/>
+            <RowDefinition Height="15.333"/>
             <RowDefinition Height="auto"/>
-            <RowDefinition Height="auto"/>
-            <RowDefinition Height="auto"/>
-            <RowDefinition Height="auto"/>
-            <RowDefinition Height="auto"/>
-            <RowDefinition/>
             <RowDefinition Height="auto"/>
         </Grid.RowDefinitions>
 
         <!--Add Task Button-->
-        <Button x:Name="AddNewTaskbtn" Content="Add Task" HorizontalAlignment="Left" Margin="40,281,0,0" VerticalAlignment="Top" Width="75" Grid.Column="4" Grid.Row="6" Height="20"  />
+        <Button x:Name="AddNewTaskbtn" Content="Add Task" HorizontalAlignment="Left" Margin="426,286,0,68" Width="75" Grid.Column="3" Grid.Row="5" Grid.ColumnSpan="2"  />
+        
         <!--Delete Task Button-->
-        <Button x:Name="DeleteTaskbtn"  Content="Delete Task" Grid.Column="4" HorizontalAlignment="Left" Margin="40,315,0,0" Grid.Row="6" VerticalAlignment="Top" Width="75" Height="20"
-             Command="{Binding DataContext.DeleteCommand, ElementName=root}"/>
+        <Button x:Name="DeleteTaskbtn"  Content="Delete Task" Grid.Column="3" HorizontalAlignment="Left" Margin="426,332,0,0" Grid.Row="5" VerticalAlignment="Top" Width="75" Height="20"
+             Command="{Binding DataContext.DeleteCommand, ElementName=root}" Grid.ColumnSpan="2"/>
+        
         <!--Date select-->
-        <DatePicker x:Name="taskDatePicker" HorizontalAlignment="Left" Margin="40,109,0,0" VerticalAlignment="Top" Height="26" Width="214"  Grid.ColumnSpan="2" Grid.Column="4" Grid.Row="6"/>
+        <DatePicker x:Name="taskDatePicker" HorizontalAlignment="Left" Margin="426,91,0,0" VerticalAlignment="Top" Height="26" Width="214"  Grid.ColumnSpan="2" Grid.Column="3" Grid.Row="5"/>
+        
         <!--Name Select-->
-        <TextBox x:Name="NameTextBox" HorizontalAlignment="Left" Height="97" Margin="40,163,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="214" Grid.ColumnSpan="2" Grid.Column="4" Grid.Row="6" />
+        <TextBox x:Name="NameTextBox" HorizontalAlignment="Left" Height="97" Margin="426,166,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="214" Grid.ColumnSpan="2" Grid.Column="3" Grid.Row="5" />
+       
         <!--Today's Date-->
-        <TextBlock x:Name="currentDateTxtBlock" Grid.Column="4" HorizontalAlignment="Left" Margin="40,42,0,0" Grid.Row="6" TextWrapping="Wrap" VerticalAlignment="Top" Grid.ColumnSpan="2" Height="34" Width="214" />
-        <DataGrid  x:Name="tasksDataGrid"  DisplayMemberPath="" Grid.Column="3" HorizontalAlignment="Left" Height="261" Margin="64,109,0,0" Grid.Row="6" VerticalAlignment="Top" Width="Auto" CanUserAddRows="false" AutoGenerateColumns="False"
+        <TextBlock x:Name="currentDateTxtBlock" Grid.Column="3" HorizontalAlignment="Center" Margin="189,28,117,0" Grid.Row="5" TextWrapping="Wrap" VerticalAlignment="Top" Height="auto" Width="auto" FontWeight="Bold" FontSize="24" Grid.ColumnSpan="2" />
+
+        <!--Tasks DataGrid-->
+        <DataGrid  x:Name="tasksDataGrid"  DisplayMemberPath="" Grid.Column="3" HorizontalAlignment="Left" Height="261" Margin="30,91,0,0" Grid.Row="4" VerticalAlignment="Top" Width="Auto" CanUserAddRows="false" AutoGenerateColumns="False"
                   SelectedItem="{Binding SelectedTask, Mode=OneWay}">
 
             <DataGrid.CellStyle>
@@ -65,7 +70,8 @@
                         </Trigger>
                     </Style.Triggers>
                 </Style>
-            </DataGrid.CellStyle> 
+            </DataGrid.CellStyle>
+            
             <!--Complete/Overdue bindings-->
             <DataGrid.RowStyle>
                 <Style TargetType="DataGridRow">
@@ -77,36 +83,38 @@
                             <Setter Property="Background" Value="#FF6FAF8B"></Setter>
                         </DataTrigger>
 
+
+
                     </Style.Triggers>
                 </Style>
-
             </DataGrid.RowStyle>
 
             <DataGrid.Columns>
                 <!--col 0 Checkbox for completion-->
-                <DataGridTemplateColumn Width="Auto">
+                <DataGridTemplateColumn Width="Auto" Header="Done">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
                             <CheckBox IsChecked="{Binding IsComplete, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
+                
                 <!--col 1 Task Due Date -->
-                <DataGridTemplateColumn Width="Auto">
+                <DataGridTemplateColumn Width="Auto" Header="Date">
                     <DataGridTemplateColumn.CellTemplate>
-                        <DataTemplate>
-                            <DatePicker x:Name="datePickStartDate" SelectedDate="{Binding Date, Mode=TwoWay}"
-                        HorizontalAlignment="Left" />
+                        <DataTemplate >
+                            <DataGridColumnHeader>
+
+                                <DatePicker x:Name="datePickStartDate" SelectedDate="{Binding Date, Mode=TwoWay}"/>
+
+                            </DataGridColumnHeader>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
 
                 <!--col 2 Task Name-->
                 <DataGridTextColumn Header="Name" x:Name="NameDataGridText" Binding="{Binding Name}" MinWidth="200" />
-
             </DataGrid.Columns>
-
         </DataGrid>
-
     </Grid>
 </reactiveui:ReactiveWindow>

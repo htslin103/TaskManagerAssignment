@@ -33,8 +33,9 @@ namespace TaskManager.Views
             //Item bindings 
             this.Bind(ViewModel, vm => vm.ContentName, v => v.NameTextBox.Text);
             this.Bind(ViewModel, vm => vm.ContentDate, v => v.taskDatePicker.Text);
-            this.OneWayBind(ViewModel, vm => vm.CurrentDate, v => v.currentDateTxtBlock.Text);
+            this.OneWayBind(ViewModel, vm => vm.DateLabel, v => v.currentDateTxtBlock.Text);
             this.Bind(ViewModel, vm => vm.SelectedTask, view => view.tasksDataGrid.SelectedItem);
+            this.Bind(ViewModel, vm => vm.IsOverdue, view => view.tasksDataGrid.SelectedItem);
 
 
 

@@ -8,6 +8,7 @@ using ReactiveUI;
 using Splat;
 using System.Windows;
 using System.Reactive;
+using System.Windows.Forms;
 
 namespace TaskManager.ViewModels
 {
@@ -17,12 +18,15 @@ namespace TaskManager.ViewModels
         private ObservableCollection<Task> taskList;
         private Task selectedTask;
         private string contentName;
-        private string contentDate;
+        private DateTime contentDate;
+        private bool isOverdue;
+        private bool isComplete;
  
 
 
         public ReactiveCommand<string, Unit> AddCommand { get; }
         public ReactiveCommand<Task, Unit> DeleteCommand { get; }
+        public ReactiveCommand<Task, Unit> CompleteCommand { get; }
 
         //Constructor
         public TaskViewModel()
@@ -32,14 +36,15 @@ namespace TaskManager.ViewModels
             // create a task list with fake     
             taskList = new ObservableCollection<Task>()
             {
-                new Task { Id=1, Date = "01/10/2020" , Name = "Fight stuff"},
-                new Task { Id=2, Date = "02/10/2020" , Name = "Cook stuff"},
-                new Task { Id=3, Date = "03/10/2020" , Name = "Destroy stuff"}
+                new Task { Id=1, Date = new DateTime(2020, 1, 18) , Name = "Fight stuff", IsOverdue = true},
+                new Task { Id=2, Date = new DateTime(2020, 2, 7) , Name = "Cook stuff", IsOverdue = true},
+                new Task { Id=3, Date = new DateTime(2020, 3, 5) , Name = "Destroy stuff", IsOverdue =true}
             };
             //load the data
             LoadData();
             AddCommand = ReactiveCommand.Create<string>(x => AddNewTask(x));
             DeleteCommand = ReactiveCommand.Create<Task>(x => DeleteTask(SelectedTask));
+            CompleteCommand = ReactiveCommand.Create<Task>(x => DeleteTask(SelectedTask));
         }
 
         public Task SelectedTask
@@ -54,18 +59,47 @@ namespace TaskManager.ViewModels
             set => this.RaiseAndSetIfChanged(ref contentName, value);
         }
 
-        public string ContentDate
+        public DateTime ContentDate
         {
             get { return contentDate; }
             set => this.RaiseAndSetIfChanged(ref contentDate, value);
+        }
+
+        public string DateLabel
+        {
+             get
+             {
+                var curMonth =  DateTime.Now.ToString("MMMM");
+                var curDay =  DateTime.Now.ToString("dd");
+                var curYear = DateTime.Now.ToString("yyyy");
+                var dateLabel = curMonth + " " + curDay + ", " + curYear;
+                return dateLabel;
+             }
         }
 
         public DateTime CurrentDate
         {
             get
             {
-                return DateTime.Now;
+                return DateTime.Now.Date;
             }
+        }
+
+        public bool IsOverdue
+        {
+            get
+            {
+                return isOverdue;
+            }
+            set => this.RaiseAndSetIfChanged(ref isOverdue, value);
+        }
+        public bool IsComplete
+        {
+            get
+            {
+                return isComplete;
+            }
+            set => this.RaiseAndSetIfChanged(ref isComplete, value);
         }
 
         //Loads the task list to read
@@ -83,21 +117,23 @@ namespace TaskManager.ViewModels
         //Adds a new task to the list 
         public void AddNewTask(string contentNew)
         {
-            if (string.IsNullOrWhiteSpace(ContentName))//ContentNew
+            if (string.IsNullOrWhiteSpace(ContentName))
             {
                 // display error message
-                MessageBox.Show("Please enter a name for the new task", "Error");
+                System.Windows.MessageBox.Show("Please enter a name for the new task", "Error");
                 return;
-            }
-            if (string.IsNullOrWhiteSpace(ContentDate))//ContentNew
-            {
-                // display error message
-                MessageBox.Show("Please enter a date for the new task", "Error");
-                return;
-            }
+            }       
+
 
             // create new task object
             var newTask = new Task { Name = ContentName, Date = ContentDate };
+
+            //If task date is earlier than today's date
+            if (ContentDate < CurrentDate)
+            {
+                //mark as overdue
+                newTask.IsOverdue = true;
+            }
             // assign id to new task
             if (taskList.Count != 0) // list is not empty, current id = last id + 1
             {
@@ -113,7 +149,24 @@ namespace TaskManager.ViewModels
             //Load the list again
             LoadData();
         }
+        public void MarkTaskComplete(Task task)
+        {
+            if (task != null)
+            {
+                try
+                {
+                    // remove task from list
+                    task.IsComplete = true;
+                }
+                catch (Exception)
+                {
+                    System.Windows.MessageBox.Show("Error marking task as complete", "Error");
+                }
 
+            }
+
+        }
+      
         /// <summary>
         /// Deletes task from the list
         /// </summary>
@@ -129,7 +182,7 @@ namespace TaskManager.ViewModels
                 }
                 catch (Exception)
                 {
-                    MessageBox.Show("Error deleting task", "Error");
+                    System.Windows.MessageBox.Show("Error deleting task", "Error");
                 }
                 
             }
